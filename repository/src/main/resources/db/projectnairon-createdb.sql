@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `nairondb`.`nairon_user` (
   `nairon_user_id` INT(10) NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(100) NOT NULL,
   `phone_number` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(150) NOT NULL,
   `full_name` VARCHAR(100) NULL DEFAULT NULL,
   `business_sector` VARCHAR(100) NULL DEFAULT NULL,
   `business_name` VARCHAR(100) NULL DEFAULT NULL,

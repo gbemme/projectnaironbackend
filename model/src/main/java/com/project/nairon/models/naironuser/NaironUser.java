@@ -1,9 +1,17 @@
 package com.project.nairon.models.naironuser;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
+import com.project.nairon.models.role.Role;
+
 @Entity
-@Table(name =  "nairon_user")
+@Table(name =  "nairon_user",
+				uniqueConstraints = { 
+							@UniqueConstraint(columnNames = {"email"})						
+							})
 //@IdClass(NaironUserId.class)
 public class NaironUser {
 
@@ -16,6 +24,8 @@ public class NaironUser {
     @Column(name = "email")
     private String email;
 
+    
+   
     @Column(name = "phone_number")
     private String phoneNumber;
 
@@ -34,10 +44,34 @@ public class NaironUser {
     @Column(name = "gender")
     private String gender;
 
-    @Column(name = "role")
-    private String role;
+   
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "roles_has_nairon_user",
+    joinColumns = @JoinColumn(name = "nairon_user__id"), inverseJoinColumns = @JoinColumn(name = "roles_roles_id"))
+    private Set<Role> roles = new HashSet<>();
+    
+    
+    
 
-    public Long getNaironUserId() {
+    
+
+	public NaironUser(String email,  String phoneNumber, String password, String fullname,
+			String businessSector, String businessName, String gender) {
+		super();
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.password = password;
+		this.fullname = fullname;
+		this.businessSector = businessSector;
+		this.businessName = businessName;
+		this.gender = gender;
+	}
+
+	public NaironUser() {
+		
+	}
+
+	public Long getNaironUserId() {
         return naironUserId;
     }
 
@@ -48,8 +82,11 @@ public class NaironUser {
     public String getEmail() {
         return email;
     }
+    
 
-    public void setEmail(String email) {
+
+
+	public void setEmail(String email) {
         this.email = email;
     }
 
@@ -101,12 +138,16 @@ public class NaironUser {
         this.gender = gender;
     }
 
-    public String getRole() {
-        return role;
-    }
+    
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+    
+    
 }
 

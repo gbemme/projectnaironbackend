@@ -1,5 +1,7 @@
 package com.project.nairon.models.naironuser;
 
+import java.util.Set;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -11,6 +13,10 @@ public class NaironUserDTO {
         @Email
         @NotNull
         private String email;
+        
+        //@NotNull
+       // private String username;
+
 
         @NotNull
         private String phoneNumber;
@@ -27,8 +33,8 @@ public class NaironUserDTO {
 
         private String gender;
 
-        private String role;
-
+       private Set<String> role;
+       
         public String getEmail() {
             return email;
         }
@@ -36,8 +42,17 @@ public class NaironUserDTO {
         public void setEmail(String email) {
             this.email = email;
         }
+        
 
-        public String getPhoneNumber() {
+//        public String getUsername() {
+//			return username;
+//		}
+//
+//		public void setUsername(String username) {
+//			this.username = username;
+//		}
+
+		public String getPhoneNumber() {
             return phoneNumber;
         }
 
@@ -84,27 +99,16 @@ public class NaironUserDTO {
         public void setGender(String gender) {
             this.gender = gender;
         }
+        
 
-        public String getRole() {
-            return role;
-        }
+    public Set<String> getRole() {
+			return role;
+		}
 
-        public void setRole(String role) {
-            this.role = role;
-        }
+		public void setRole(Set<String> role) {
+			this.role = role;
+		}
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("NaironUserDTO{");
-        sb.append("email='").append(email).append('\'');
-        sb.append(", phoneNumber='").append(phoneNumber).append('\'');
-        sb.append(", password='").append(password).append('\'');
-        sb.append(", fullname='").append(fullname).append('\'');
-        sb.append(", businessSector='").append(businessSector).append('\'');
-        sb.append(", businessName='").append(businessName).append('\'');
-        sb.append(", gender='").append(gender).append('\'');
-        sb.append(", role='").append(role).append('\'');
-        sb.append('}');
-        return sb.toString();
-    }
+		
+	
 }

@@ -4,8 +4,10 @@
 package com.project.nairon.controller.payment;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.flutterwave.rave.java.payload.transferPayload;
@@ -19,7 +21,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
  *
  */
 
-
+@RequestMapping("/api/pay")
 @RestController
 @Tag(name = "Flutterwave Payment", description = "The Flutter Payment Service API")
 public class AdvertiserPaymentController {
@@ -33,9 +35,10 @@ public class AdvertiserPaymentController {
 
 
 	@GetMapping("/home")
+	@PreAuthorize("hasRole('ADVERTISER')")
 	@Operation(summary = "Welcome to Flutter Service", description = "this is just a welcome message", tags = { "Flutterwave Payment" })
 	public String test() {
-		return "Hello FlutterWave";
+		return "Hello advertiser welcome to  FlutterWave payment";
 	}
 
 	@PostMapping("/transfer")
